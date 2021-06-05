@@ -27,7 +27,7 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 ## Initialize control plane
 
 ```
-kubeadm init --apiserver-advertise-address=<inet_address_of_master>
+sudo kubeadm init --apiserver-advertise-address=<inet_address_of_master>
 ```
 
 NOTE DOWN THE kubadm join command.
@@ -114,3 +114,17 @@ kubeadm token create --print-join-command
 Copy contents of `.kube/config` from control-plane node
 
 And paste it in `.kube/config` in current machine.
+
+
+
+# AWS (master) -> Just mentioning the difference
+
+```
+sudo kubeadm init --control-plane-endpoint=ec2-35-158-100-39.eu-central-1.compute.amazonaws.com
+```
+
+# AWS (slave) -> Just mentioning the difference
+
+```
+kubeadm join ec2-35-158-100-39.eu-central-1.compute.amazonaws.com:6443 --token e8oyka.269wjz48nq8lv9fj --discovery-token-ca-cert-hash sha256:1ea09157d3b6271fe206e73d3e73c43c10b456275beb373c545fd609813eea23
+```
